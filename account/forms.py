@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from .models import User
 from django.core.exceptions import ValidationError
-from .models import UserProfile
 import re
 
 class SignUpForm(UserCreationForm):
@@ -20,19 +19,13 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'username', 'password1', 'password2')
-
-    def clean_general_text_field(self, field_value):
-        if not re.search(r'^[\w\s.,()-]+$', field_value, re.UNICODE):
-            raise ValidationError("This field contains invalid characters.")
-        return field_value
+        fields = ('username', 'email', 'password1', 'password2')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
             raise ValidationError("This email address is already in use.")
         return email
-
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
@@ -42,15 +35,11 @@ class SignUpForm(UserCreationForm):
             raise ValidationError("This username is already taken.")
         return username
 
-    
     def save(self, commit=True):
         user = super(SignUpForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
 
         if commit:
             user.save()
-            UserProfile.objects.create(
-                user=user,
-            )
 
         return user

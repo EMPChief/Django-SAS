@@ -1,3 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import CategoryForm, TagForm, LinkForm
 
-# Create your views here.
+def create_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = CategoryForm(user=request.user)
+    return render(request, 'links/create_category.html', {'form': form})
+
+def create_tag(request):
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TagForm()
+    return render(request, 'links/create_tag.html', {'form': form})
+
+def create_link(request):
+    if request.method == 'POST':
+        form = LinkForm(request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = LinkForm(user=request.user)
+    return render(request, 'links/create_link.html', {'form': form})

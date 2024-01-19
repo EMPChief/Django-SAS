@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.messages import error
 from .my_dec import need_log_out
 
-@need_log_out('index')
+@need_log_out('home')
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -27,7 +27,7 @@ def register(request):
     context = {'form': form}
     return render(request, 'account/register.html', context)
 
-@need_log_out('index')
+@need_log_out('home')
 def custom_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -36,7 +36,7 @@ def custom_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('home')
         else:
             messages.error(request, 'Invalid username or password.')
 
@@ -45,4 +45,4 @@ def custom_login(request):
 @login_required(login_url='/login/')
 def custom_logout(request):
     logout(request)
-    return redirect('index')
+    return redirect('home')

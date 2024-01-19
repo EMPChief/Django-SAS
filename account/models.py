@@ -1,12 +1,23 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+# from djstripe.models import Customer, Subscription
 
-# Create your models here.
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, related_name='userprofile', on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True, null=True)
-    birth_date = models.DateField(blank=True, null=True)
 
-    def __str__(self):
-        return f'{self.user.username} Profile'
+
+class Plan(models.Model):
+    """
+    Plan model to manage different subscription plans.
+    """
+    name = models.CharField(max_length=255)
+    max_num_links = models.IntegerField()
+
+
+class User(AbstractUser):
+
+    """
+    Custom User model that extends AbstractUser with additional fields.
+    """
+    plan = models.ForeignKey(Plan, related_name='users', default=1, on_delete=models.CASCADE)
+    # customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
+    # subscription = models.ForeignKey(Subscription, null=True, blank=True, on_delete=models.SET_NULL)
