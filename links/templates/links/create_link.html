@@ -1,0 +1,105 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Create Link{% endblock %}
+
+{% block content %}
+<div class="mt-8 min-h-screen flex items-center justify-center">
+    <div class="bg-gray-100 p-6 rounded-xl shadow-lg hover:shadow-xl transition-transform transform hover:scale-105 w-full sm:max-w-md transition-all duration-500 ease-in">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center">{{ title }}</h1>
+
+        {% if request.user.links.all.count >= request.user.plan.max_num_links %}
+            <div class="mt-6 p-6 bg-rose-600 text-white rounded-xl text-center">
+                You have reached the top of your plan!
+            </div>
+        {% else %}
+            <form method="post" action=".">
+                {% csrf_token %}
+                <div class="mt-6 space-y-4">
+                    {{ form.non_field_errors }}
+                    
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.name.label_tag }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.url.label_tag }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.url }}
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.description.label_tag }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.description }}
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.category.label_tag }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.category }}
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.is_active.label_tag }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.is_active }}
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.status.label_tag }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.status }}
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mb-4 transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.priority.label_tag }}
+                        </div>
+                    </div>
+                    <div class="flex justify-center transition-all duration-300 ease-in">
+                        <div>
+                            {{ form.priority }}
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="mt-4 py-4 px-6 bg-cyan-500 hover:bg-cyan-600 text-white rounded-xl transition duration-300 ease-in-out transform hover:scale-105 w-full">
+                    Submit
+                </button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User, Plan
 from django.core.exceptions import ValidationError
 import re
 
@@ -40,6 +40,9 @@ class SignUpForm(UserCreationForm):
         user.email = self.cleaned_data['email']
 
         if commit:
+            # Ensure a Plan instance exists before saving the User
+            if not Plan.objects.filter(id=user.plan_id).exists():
+                Plan.objects.create(id=user.plan_id, name='Default Plan', max_num_links=10, max_num_tag=10, max_num_catagory=10)
             user.save()
 
         return user

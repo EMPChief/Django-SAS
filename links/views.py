@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import CategoryForm, TagForm, LinkForm
+from .forms import CategoryForm, LinkForm
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url='/login/')
 def create_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST, user=request.user)
@@ -11,16 +14,10 @@ def create_category(request):
         form = CategoryForm(user=request.user)
     return render(request, 'links/create_category.html', {'form': form})
 
-def create_tag(request):
-    if request.method == 'POST':
-        form = TagForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = TagForm()
-    return render(request, 'links/create_tag.html', {'form': form})
 
+
+
+@login_required(login_url='/login/')
 def create_link(request):
     if request.method == 'POST':
         form = LinkForm(request.POST, user=request.user)

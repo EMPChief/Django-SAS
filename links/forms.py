@@ -1,12 +1,13 @@
 from django import forms
-from .models import Category, Tag, Link
+from .models import Category, Link
 
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name', 'description']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40})
+            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'name': forms.TextInput(attrs={'class': 'block font-bold text-lg mb-2 text-gray-700'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -20,19 +21,22 @@ class CategoryForm(forms.ModelForm):
             category.save()
         return category
 
-class TagForm(forms.ModelForm):
-    class Meta:
-        model = Tag
-        fields = ['name']
+
+from django import forms
+from .models import Category, Link
 
 class LinkForm(forms.ModelForm):
     class Meta:
         model = Link
-        fields = ['name', 'url', 'description', 'category', 'is_active', 'tags', 'status', 'priority']
+        fields = ['name', 'url', 'description', 'category', 'is_active', 'status', 'priority']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
-            'url': forms.URLInput(attrs={'placeholder': 'https://example.com'}),
-            'tags': forms.CheckboxSelectMultiple()
+            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40, 'class': 'block w-full p-2 border border-gray-300 rounded-lg'}),
+            'url': forms.URLInput(attrs={'placeholder': 'https://example.com', 'class': 'block w-full p-2 border border-gray-300 rounded-lg'}),
+            'name': forms.TextInput(attrs={'class': 'block w-full p-2 border border-gray-300 rounded-lg'}),
+            'category': forms.Select(attrs={'class': 'block w-full p-2 border border-gray-300 rounded-lg'}),
+            'is_active': forms.CheckboxInput(attrs={'class': 'form-checkbox'}),
+            'status': forms.Select(attrs={'class': 'block w-full p-2 border border-gray-300 rounded-lg'}),
+            'priority': forms.Select(attrs={'class': 'block w-full p-2 border border-gray-300 rounded-lg'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -46,5 +50,5 @@ class LinkForm(forms.ModelForm):
         link.created_by = self.user
         if commit:
             link.save()
-            self._save_m2m()
         return link
+

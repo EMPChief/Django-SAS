@@ -42,9 +42,8 @@ class Link(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
-    tags = models.ManyToManyField(Tag, blank=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='need')
-    priority = models.CharField(max_length=50, choices=PRIORITY_CHOICES, default='medium')
+    priority = models.CharField(max_length=50, choices=PRIORITY_CHOICES, default='low')
 
     def __str__(self):
         return self.name
