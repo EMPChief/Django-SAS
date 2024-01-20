@@ -22,8 +22,6 @@ class CategoryForm(forms.ModelForm):
         return category
 
 
-from django import forms
-from .models import Category, Link
 
 class LinkForm(forms.ModelForm):
     class Meta:

@@ -1,8 +1,32 @@
-{% extends "core/base.html" %}
-{%block title%}Home{%endblock%}
-{%block content%}
-<div class="container">
-<h1>Welcome to the Home Page</h1>
-</div>
-{%endblock%}
+{% extends 'core/base.html' %}
 
+{% block title %}Welcome to Link SAS{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-blue-300 to-blue-500">
+    <div class="py-16 sm:py-24 md:py-32 lg:py-40 xl:py-48 text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-8">Welcome to EMP SAS</h1>
+        <p class="text-gray-200 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-12">
+            Your all-in-one solution for link management and organization.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0">
+            {% if user.is_authenticated %}
+                <a href="{% url 'create-category' %}" class="bg-cyan-500 hover:bg-cyan-600 text-white py-3 sm:py-4 px-6 sm:px-8 rounded-lg text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl transition duration-300 ease-in-out transform hover:scale-105 mx-2">
+                    Create Category
+                </a>
+                <a href="{% url 'create-link' %}" class="bg-cyan-500 hover:bg-cyan-600 text-white py-3 sm:py-4 px-6 sm:px-8 rounded-lg text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl transition duration-300 ease-in-out transform hover:scale-105 mx-2">
+                    Create Link
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="bg-cyan-500 hover:bg-cyan-600 text-white py-3 sm:py-4 px-6 sm:px-8 rounded-lg text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl transition duration-300 ease-in-out transform hover:scale-105 mx-2">
+                    Login
+                </a>
+                <a href="{% url 'register' %}" class="bg-cyan-500 hover:bg-cyan-600 text-white py-3 sm:py-4 px-6 sm:px-8 rounded-lg text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl transition duration-300 ease-in-out transform hover:scale-105 mx-2">
+                    Sign Up
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

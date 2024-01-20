@@ -1,6 +1,16 @@
 from django.shortcuts import render, redirect
 from .forms import CategoryForm, LinkForm
+from .models import Category, Link
 from django.contrib.auth.decorators import login_required
+
+
+@login_required(login_url='/login/')
+def links(request):
+    links = Link.objects.filter(created_by=request.user)
+    context = {'links': links}
+    return render(request, 'links/links.html', context)
+
+
 
 
 @login_required(login_url='/login/')
