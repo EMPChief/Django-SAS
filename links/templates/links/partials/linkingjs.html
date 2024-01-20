@@ -1,0 +1,18 @@
+<script>
+    document.querySelectorAll('.description-toggle').forEach(function(el) {
+        el.addEventListener('click', function() {
+            const description = el.parentElement.querySelector('.description-hover');
+            const truncateDescription = el.parentElement.querySelector('.truncate');
+            const isHidden = truncateDescription.classList.contains('hidden');
+            
+            truncateDescription.classList.toggle('hidden');
+            description.classList.toggle('hidden');
+            
+            if (isHidden) {
+                el.textContent = 'Read more';
+            } else {
+                el.textContent = 'Read less';
+            }
+        });
+    });
+</script>

@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Links{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-4xl font-bold mb-8 hover:text-blue-700 transition-colors ease-in">Links</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for link in links %}
+        {% include 'links/partials/linking.html' %}
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container mx-auto py-4 text-center">
+    <a href="#top" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-transform transform hover:scale-105 ease-in">
+        Go to Page Top
+    </a>
+</div>
+
+{%include 'links/partials/linkingjs.html'%}
+{% endblock %}

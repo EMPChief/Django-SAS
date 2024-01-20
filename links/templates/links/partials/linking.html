@@ -1,0 +1,25 @@
+<div class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 ease-in">
+    <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline hover:text-blue-700">
+        {{ link.name }}
+    </a>
+    <div class="mt-2">
+        <p class="text-gray-600">
+            <span class="truncate inline" style="max-width: 200px;">
+                {{ link.description|slice:":20" }}{% if link.description|length > 20 %}...{% endif %}
+            </span>
+            <span class="hidden description-hover">{{ link.description }}</span>
+        </p>
+        {% if link.description|length > 20 %}
+        <a href="javascript:void(0);" class="text-blue-600 hover:underline description-toggle">Read more</a>
+        {% endif %}
+    </div>
+    <div class="mt-4 flex justify-between text-gray-700 text-sm hover:text-gray-900">
+        <span>{{ link.category.name }}</span>
+        <span>{{ link.created_at|date:"F j, Y" }}</span>
+    </div>
+    <div class="mt-2">
+        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block mt-2 transition-transform transform hover:scale-105 ease-in">
+            Go to
+        </a>
+    </div>
+</div>

@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://favi.bjornmagne.com/bmklogo3/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://favi.bjornmagne.com/emp2l/bmklogo3-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/x-icon" href="https://favi.bjornmagne.com/emp2l/bmklogo3.ico">
 </head>
 <body class="font-sans">
     {% include 'core/partials/nav.html' %}
@@ -16,28 +19,11 @@
         {% endblock %}
     </main>
     
-    <footer class="bg-teal-700 py-6 text-white text-center">
-        <div class="container mx-auto">
-            <p class="text-lg mb-2">&copy; 2024 EMPLinks. All rights reserved.</p>
-            <p class="text-sm">Stay connected with us:</p>
-            <div class="flex justify-center mt-2">
-                <a href="#" class="text-xl mx-2 hover:text-cyan-400"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-xl mx-2 hover:text-cyan-400"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-xl mx-2 hover:text-cyan-400"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </footer>
+    {%include 'core/partials/footer.html'%}
     
 
     
 
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
-
-        menuToggle.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-    </script>
+{%include 'core/partials/script.html'%}
 </body>
 </html>
