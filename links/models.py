@@ -10,6 +10,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        ordering = ('name',)
 
 
 
@@ -44,6 +47,9 @@ class Link(models.Model):
     is_active = models.BooleanField(default=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='need')
     priority = models.CharField(max_length=50, choices=PRIORITY_CHOICES, default='low')
+    
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.name

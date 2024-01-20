@@ -10,7 +10,11 @@ def links(request):
     context = {'links': links}
     return render(request, 'links/links.html', context)
 
-
+@login_required(login_url='/login/')
+def catagories(request):
+    categories = Category.objects.filter(created_by=request.user)
+    context = {'categories': categories}
+    return render(request, 'links/catagories.html', context)
 
 
 @login_required(login_url='/login/')

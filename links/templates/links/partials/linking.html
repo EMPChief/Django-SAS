@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 ease-in">
+<div class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 ease-in text-center">
     <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline hover:text-blue-700">
         {{ link.name }}
     </a>
@@ -17,8 +17,14 @@
         <span>{{ link.category.name }}</span>
         <span>{{ link.created_at|date:"F j, Y" }}</span>
     </div>
-    <div class="mt-2">
-        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block mt-2 transition-transform transform hover:scale-105 ease-in">
+    <div class="mt-2 flex items-center">
+        <a href="#" class="text-red-600 hover:text-red-700 mr-2">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+        <a href="#" class="text-blue-600 hover:text-blue-700 ml-6">
+            <i class="fas fa-edit"></i>
+        </a>
+        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block ml-auto transition-transform transform hover:scale-105 ease-in">
             Go to
         </a>
     </div>

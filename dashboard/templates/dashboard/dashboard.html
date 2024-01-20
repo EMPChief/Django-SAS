@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-8 text-center">Dashboard</h1>
+<div class="container mx-auto py-8">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Recent Categories</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {% for category in categories %}
+        <div class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 ease-in">
+            <h2 class="text-xl font-semibold">{{ category.name }}</h2>
+            <p class="text-gray-600">{{ category.description }}</p>
+        </div>
+        {% empty %}
+        <p>No categories found.</p>
+        {% endfor %}
+    </div>
+</div>
+<div class="recentlinks mx-auto py-8">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Recent Links</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for link in links %}
+        {% include 'links/partials/linking.html' %}
+        {% endfor %}
+    </div>
+</div>
+</div>
+{%include 'links/partials/scripts.html'%}
+{% endblock %}

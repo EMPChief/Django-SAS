@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Category Details{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-8 text-center">{{ category.name }}</h1>
+<div class="container mx-auto py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Display category details -->
+        {% for category in categories %}
+        <div class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 ease-in text-center">
+            <h2 class="text-xl font-semibold mb-2">Category Name</h2>
+            <p class="text-gray-600">{{ category.name }}</p>
+            <div class="mt-2">
+                <h2 class="text-xl font-semibold mb-2">Category Description</h2>
+                <p class="text-gray-600">
+                    <span class="description-truncate" style="max-width: 200px;">
+                        {{ category.description|slice:":20" }}
+                    </span>
+                    <span class="description-full hidden">{{ category.description }}</span>
+                </p>
+                {% if category.description|length > 23 %}
+                <a href="javascript:void(0);" class="text-blue-600 hover:underline description-toggle">Read more</a>
+                {% endif %}
+            </div>
+            <!-- You can add more category-related content here if needed -->
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    document.querySelectorAll('.description-toggle').forEach(function(el) {
+        el.addEventListener('click', function() {
+            const descriptionTruncate = el.parentElement.querySelector('.description-truncate');
+            const descriptionFull = el.parentElement.querySelector('.description-full');
+            const isHidden = descriptionTruncate.classList.contains('hidden');
+            
+            descriptionTruncate.classList.toggle('hidden');
+            descriptionFull.classList.toggle('hidden');
+            
+            if (isHidden) {
+                el.textContent = 'Read more';
+            } else {
+                el.textContent = 'Read less';
+            }
+        });
+    });
+</script>
+{% endblock %}
