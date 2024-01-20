@@ -9,7 +9,7 @@ def create_category(request):
         form = CategoryForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('create-category')
     else:
         form = CategoryForm(user=request.user)
     return render(request, 'links/create_category.html', {'form': form})
@@ -23,7 +23,7 @@ def create_link(request):
         form = LinkForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('create-link')
     else:
         form = LinkForm(user=request.user)
     return render(request, 'links/create_link.html', {'form': form})
