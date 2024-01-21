@@ -1,0 +1,25 @@
+<div class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 ease-in text-center">
+    <h2 class="text-xl font-semibold mb-2">Category Name</h2>
+    <p class="text-gray-600">{{ category.name }}</p>
+    <!-- Category description with toggle functionality -->
+    <div class="mt-2">
+        <h2 class="text-xl font-semibold mb-2">Category Description</h2>
+        <p class="text-gray-600">
+            <span class="description-truncate" style="max-width: 200px;">
+                {{ category.description|slice:":20" }}
+            </span>
+            <span class="description-full hidden">{{ category.description }}</span>
+        </p>
+        {% if category.description|length > 20 %}
+        <a href="javascript:void(0);" class="text-blue-600 hover:underline description-toggle">Read more</a>
+        {% endif %}
+    </div>
+    <div class="mt-4 flex justify-center space-x-4">
+        <a href="{% url 'edit-category' pk=category.pk %}" class="text-blue-600 hover:text-blue-700">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+        <a href="#" class="text-red-600 hover:text-red-700 delete-category" data-category-id="{{ category.pk }}">
+            <i class="fas fa-trash-alt"></i> Delete
+        </a>
+    </div>
+</div>

@@ -39,11 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djstripe',
     'account',
     'core',
     'dashboard',
     'links',
 ]
+STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_API_SECRET_LIVE", "<default-live-secret-key>")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_API_SECRET_TEST", "<default-test-secret-key>")
+STRIPE_LIVE_MODE = False  # Change to True in production
+DJSTRIPE_WEBHOOK_SECRET = "whsec_xxx"  # Get it from the s ection in the Stripe dashboard where you added the webhook endpoint
+DJSTRIPE_USE_NATIVE_JSONFIELD = True
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

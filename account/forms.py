@@ -46,3 +46,10 @@ class SignUpForm(UserCreationForm):
             user.save()
 
         return user
+
+from django import forms
+
+class ChangePlanForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['plan']

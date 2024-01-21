@@ -44,15 +44,11 @@ def links(request):
     }
     return render(request, 'links/links.html', context)
 
-
-
 @login_required(login_url='/login/')
 def categories(request):
     categories = Category.objects.filter(created_by=request.user)
     context = {'categories': categories}
     return render(request, 'links/categories.html', context)
-
-
 
 @login_required(login_url='/login/')
 def create_category(request):
@@ -71,9 +67,6 @@ def create_category(request):
         'title': title,
     }
     return render(request, 'links/create_category.html', context)
-
-
-
 
 @login_required(login_url='/login/')
 def create_link(request):
@@ -126,3 +119,14 @@ def edit_link(request, pk):
         'title': title,
     }
     return render(request, 'links/create_link.html', context)
+
+@login_required(login_url='/login/')
+def delete_category(request, pk):
+    category = get_object_or_404(Category, created_by=request.user, pk=pk)
+    category.delete()
+    return redirect('categories')
+
+def delete_link(request, pk):
+    link = get_object_or_404(Link, pk=pk, created_by=request.user)
+    link.delete()
+    return redirect('links')

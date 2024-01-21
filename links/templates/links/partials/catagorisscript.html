@@ -1,0 +1,24 @@
+<script>
+    document.querySelectorAll('.description-toggle').forEach(function(el) {
+        el.addEventListener('click', function() {
+            const descriptionTruncate = el.parentElement.querySelector('.description-truncate');
+            const descriptionFull = el.parentElement.querySelector('.description-full');
+            descriptionTruncate.classList.toggle('hidden');
+            descriptionFull.classList.toggle('hidden');
+            el.textContent = el.textContent === 'Read more' ? 'Read less' : 'Read more';
+        });
+    });
+
+
+document.querySelectorAll('.delete-category').forEach(function(el) {
+    el.addEventListener('click', function(e) {
+        e.preventDefault();
+        const categoryId = el.getAttribute('data-category-id');
+        const confirmDelete = confirm('Are you sure you want to delete this category?');
+        if (confirmDelete) {
+            window.location.href = `/links/categories/${categoryId}/delete/`;
+        }
+    });
+});
+
+</script>

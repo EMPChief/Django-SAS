@@ -1,0 +1,64 @@
+{% extends "core/base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<script src="https://js.stripe.com/v3/"></script>
+
+<div class="container mx-auto my-8">
+
+  <div class="flex flex-wrap">
+    {% for p in products %}
+    <div class="w-1/2">
+      <div class="mx-5 my-2 shadow-lg rounded-none bg-white p-4">
+        <h5 class="font-bold">{{ p.name }}</h5>
+        <p class="text-gray-600">{{ p.description }}</p>
+
+        {% for plan in p.plan_set.all %}
+        <h5>{{ plan.human_readable_price }}</h5>
+        <div class="text-right">
+          <!-- Ensure the onclick event calls planSelect with the right arguments -->
+          <input type="checkbox" name="{{ p.name }}" value="{{ p.id }}" onclick="planSelect('{{ p.name }}', '{{ plan.human_readable_price }}', '{{ plan.id }}')">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="my-8">
+    <div class="flex flex-wrap">
+      <div class="w-full">
+        <div class="card mx-5 my-2 shadow-lg rounded-lg p-4">
+          <h5 class="font-bold">Checkout</h5>
+          <p class="text-gray-600">Enter card details. Your subscription will start immediately</p>
+          <div class="flex flex-wrap">
+            <div class="w-1/2 text-gray-600">
+              <p id="plan">Plan:</p> <!-- Ensure this ID matches with the JavaScript function -->
+              <p id="price">Total:</p> <!-- Ensure this ID matches with the JavaScript function -->
+            </div>
+            <div class="w-1/2 text-right">
+              <!-- Hidden element for storing the price ID -->
+              <p hidden id="priceId"></p>
+            </div>
+          </div>
+
+          <form id="subscription-form" class="my-4">
+            <div id="card-element" class="MyCardElement h-10 py-2.5 px-3 border border-transparent rounded bg-white shadow">
+              <!-- Stripe Elements will be inserted here -->
+            </div>
+            
+            <div id="card-errors" role="alert" class="mt-2"></div>
+            <button id="submit" type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full shadow-lg">
+              <div class="spinner-border spinner-border-sm text-light hidden" id="spinner" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <span id="button-text">Subscribe</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% include "account/partials/checkjs.html" %}
+{% endblock %}
