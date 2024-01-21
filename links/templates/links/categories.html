@@ -11,6 +11,7 @@
         <div class="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:scale-105 ease-in text-center">
             <h2 class="text-xl font-semibold mb-2">Category Name</h2>
             <p class="text-gray-600">{{ category.name }}</p>
+            <!-- Category description with toggle functionality -->
             <div class="mt-2">
                 <h2 class="text-xl font-semibold mb-2">Category Description</h2>
                 <p class="text-gray-600">
@@ -19,30 +20,32 @@
                     </span>
                     <span class="description-full hidden">{{ category.description }}</span>
                 </p>
-                {% if category.description|length > 23 %}
+                {% if category.description|length > 20 %}
                 <a href="javascript:void(0);" class="text-blue-600 hover:underline description-toggle">Read more</a>
                 {% endif %}
             </div>
-            <!-- You can add more category-related content here if needed -->
+            <!-- Edit and Delete Buttons -->
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="{% url 'edit-category' pk=category.pk %}"" class="text-blue-600 hover:text-blue-700">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                <a href="/" class="text-red-600 hover:text-red-700">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </a>
+            </div>
         </div>
         {% endfor %}
     </div>
 </div>
 <script>
+    // JavaScript for toggle functionality
     document.querySelectorAll('.description-toggle').forEach(function(el) {
         el.addEventListener('click', function() {
             const descriptionTruncate = el.parentElement.querySelector('.description-truncate');
             const descriptionFull = el.parentElement.querySelector('.description-full');
-            const isHidden = descriptionTruncate.classList.contains('hidden');
-            
             descriptionTruncate.classList.toggle('hidden');
             descriptionFull.classList.toggle('hidden');
-            
-            if (isHidden) {
-                el.textContent = 'Read more';
-            } else {
-                el.textContent = 'Read less';
-            }
+            el.textContent = el.textContent === 'Read more' ? 'Read less' : 'Read more';
         });
     });
 </script>

@@ -1,0 +1,40 @@
+<!-- Sidebar for Search and Sorting -->
+<div class="w-full sm:w-1/4 p-4 mb-4 sm:mb-0">
+    <h2 class="text-2xl font-bold mb-4">Search & Sort</h2>
+    <form method="GET" action="" id="searchForm">
+        <!-- Search Field -->
+        <input
+            id="search"
+            type="text"
+            name="query"
+            class="flex-grow shadow-sm appearance-none border rounded-l-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300"
+            placeholder="Search"
+            value="{{ request.GET.query }}"
+        />
+        <!-- Dropdown for Category Sorting -->
+        <select name="category" class="w-full mb-4 p-2 border rounded" onchange="document.getElementById('searchForm').submit();">
+            <option value="">All Categories</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <!-- Dropdown for Priority Sorting -->
+<!-- Dropdown for Priority Sorting -->
+<select name="priority" class="w-full mb-4 p-2 border rounded" onchange="document.getElementById('searchForm').submit();">
+    <option value="">Sort by Priority</option>
+    {% for priority, priority_name in priority_choices %}
+        <option value="{{ priority }}" {% if selected_priority == priority %}selected{% endif %}>{{ priority_name }}</option>
+    {% endfor %}
+</select>
+<!-- Dropdown for Status Sorting -->
+<select name="status" class="w-full mb-4 p-2 border rounded" onchange="document.getElementById('searchForm').submit();">
+    <option value="">Sort by Status</option>
+    {% for status, status_name in status_choices %}
+        <option value="{{ status }}" {% if selected_status == status %}selected{% endif %}>{{ status_name }}</option>
+    {% endfor %}
+</select>
+
+        <!-- Search Button -->
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Search</button>
+    </form>
+</div>

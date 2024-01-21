@@ -18,12 +18,14 @@
         <span>{{ link.created_at|date:"F j, Y" }}</span>
     </div>
     <div class="mt-2 flex items-center">
-        <a href="#" class="text-red-600 hover:text-red-700 mr-2">
-            <i class="fas fa-trash-alt"></i>
+        <a href="{% url 'edit-link' pk=link.pk %}" class="text-blue-600 hover:text-blue-700 mr-2">
+            <i class="fas fa-edit"></i> Edit
         </a>
-        <a href="#" class="text-blue-600 hover:text-blue-700 ml-6">
-            <i class="fas fa-edit"></i>
+        <!-- Delete Button -->
+        <a href="/" class="text-red-600 hover:text-red-700">
+            <i class="fas fa-trash-alt"></i> Delete
         </a>
+        <!-- Go to Link Button -->
         <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block ml-auto transition-transform transform hover:scale-105 ease-in">
             Go to
         </a>

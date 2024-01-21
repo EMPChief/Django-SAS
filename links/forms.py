@@ -15,8 +15,9 @@ class CategoryForm(forms.ModelForm):
         super(CategoryForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        category = super(CategoryForm, self).save(commit=False)
-        category.created_by = self.user
+        category = super().save(commit=False)
+        if not category.pk:
+            category.created_by = self.user
         if commit:
             category.save()
         return category
@@ -45,7 +46,8 @@ class LinkForm(forms.ModelForm):
 
     def save(self, commit=True):
         link = super(LinkForm, self).save(commit=False)
-        link.created_by = self.user
+        if not link.pk:
+            link.created_by = self.user
         if commit:
             link.save()
         return link
