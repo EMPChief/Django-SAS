@@ -16,10 +16,20 @@
                 {% csrf_token %}
                 {% include 'links/partials/links_form.html' %}
             </form>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var form = document.getElementById('linkForm');
+                    var submitButton = form.querySelector('button');
+            
+                    form.addEventListener('submit', function () {
+                        submitButton.setAttribute('disabled', 'true');
+                    });
+                });
+            </script>
+            
         {% endif %}
     </div>
 </div>
-
-
 
 {% endblock %}
