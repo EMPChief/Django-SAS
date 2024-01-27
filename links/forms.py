@@ -22,8 +22,6 @@ class CategoryForm(forms.ModelForm):
             category.save()
         return category
 
-
-
 class LinkForm(forms.ModelForm):
     class Meta:
         model = Link
@@ -40,9 +38,27 @@ class LinkForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
+        initial_url = kwargs.pop('initial_url', None)
+
         super(LinkForm, self).__init__(*args, **kwargs)
+
         if self.user is not None:
             self.fields['category'].queryset = Category.objects.filter(created_by=self.user)
+
+        if initial_url and not self.initial.get('name'):
+            self.initial['name'] = initial_url
+
+    def clean_name(self):
+        url = self.cleaned_data.get('url')
+        name = self.cleaned_data.get('name')
+
+        if not name and url:
+            self.cleaned_data['name'] = url
+
+        return self.cleaned_data['name']
+
+
+
 
     def save(self, commit=True):
         link = super(LinkForm, self).save(commit=False)
@@ -51,4 +67,5 @@ class LinkForm(forms.ModelForm):
         if commit:
             link.save()
         return link
+
 
