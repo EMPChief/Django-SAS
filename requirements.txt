@@ -1,11 +1,11 @@
-boto3
-dj-stripe
 django
+dj-stripe
+psycopg2-binary
+python-dotenv
 django-crispy-forms
+stripe
 django-storages
 gunicorn
 jmespath
 pillow
-psycopg2-binary
-python-dotenv
-stripe
+boto3

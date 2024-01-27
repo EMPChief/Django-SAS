@@ -31,6 +31,7 @@ def register(request):
     context = {'form': form}
     return render(request, 'account/register.html', context)
 
+
 @need_log_out('home')
 def custom_login(request):
     if request.method == 'POST':
