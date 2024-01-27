@@ -21,7 +21,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG_MODE', True)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',
+                 'https://seal-app-qguy3.ondigitalocean.app/', 'seal-app-qguy3.ondigitalocean.app/', 'link.empchief.com', 'https://link.empchief.com']
 
 AUTH_USER_MODEL = 'account.User'
 
