@@ -76,13 +76,17 @@ def create_link(request):
         if form.is_valid():
             form.save()
             return redirect('create-link')
+        else:
+            print(form.errors)
     else:
         form = LinkForm(user=request.user)
-        context = {
-            'form': form,
-            'title': title,
-        }
+        
+    context = {
+        'form': form,
+        'title': title,
+    }
     return render(request, 'links/create_link.html', context)
+
 
 @login_required(login_url='/login/')
 def edit_category(request, pk):

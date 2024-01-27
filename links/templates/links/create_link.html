@@ -20,17 +20,6 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var urlInput = document.getElementById('id_url');
-        var nameInput = document.getElementById('id_name');
 
-        urlInput.addEventListener('input', function () {
-            if (nameInput.value.trim() === '') {
-                nameInput.value = urlInput.value;
-            }
-        });
-    });
-</script>
 
 {% endblock %}

@@ -63,11 +63,5 @@ class Link(models.Model):
     class Meta:
         ordering = ['-created_at']
 
-    def save(self, *args, **kwargs):
-        if not self.name:
-            self.name = self.url
-
-        super().save(*args, **kwargs)
-
     def __str__(self):
-        return f"{self.name} - {self.url}"
+        return self.name

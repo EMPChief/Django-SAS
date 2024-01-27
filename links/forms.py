@@ -48,24 +48,18 @@ class LinkForm(forms.ModelForm):
         if initial_url and not self.initial.get('name'):
             self.initial['name'] = initial_url
 
-    def clean_name(self):
-        url = self.cleaned_data.get('url')
-        name = self.cleaned_data.get('name')
-
-        if not name and url:
-            self.cleaned_data['name'] = url
-
-        return self.cleaned_data['name']
-
-
-
+        self.fields['name'].required = False
 
     def save(self, commit=True):
         link = super(LinkForm, self).save(commit=False)
         if not link.pk:
             link.created_by = self.user
+        if not link.name and link.url:
+            link.name = link.url
+
         if commit:
             link.save()
         return link
+
 
 
