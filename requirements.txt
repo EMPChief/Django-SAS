@@ -1,6 +1,11 @@
-django
+boto3
 dj-stripe
+django
+django-crispy-forms
+django-storages
+gunicorn
+jmespath
+pillow
 psycopg2-binary
 python-dotenv
-django-crispy-forms
 stripe
