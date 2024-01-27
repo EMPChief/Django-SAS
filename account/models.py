@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
-#from djstripe.models import Customer, Subscription
+from djstripe.models import Customer, Subscription
 class Plan(models.Model):
     """
     Plan model to manage different subscription plans.
@@ -16,8 +16,8 @@ class Plan(models.Model):
 
 class User(AbstractUser):
     plan = models.ForeignKey(Plan, related_name='users', default=1, on_delete=models.CASCADE)
-    #customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
-    #subscription = models.ForeignKey(Subscription, null=True, blank=True,on_delete=models.SET_NULL)
+    customer = models.ForeignKey(Customer, null=True, blank=True, on_delete=models.SET_NULL)
+    subscription = models.ForeignKey(Subscription, null=True, blank=True,on_delete=models.SET_NULL)
 
 
     def save(self, *args, **kwargs):
